@@ -111,3 +111,9 @@
 .circle {
   margin: 15px 6px;
 }
+
+.time-view {
+  color: var(--white);
+  font-size: 7rem;
+  font-weight: bold;
+}

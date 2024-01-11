@@ -100,11 +100,7 @@ function Timer() {
           >
             <Menu setActiveTimer={setActiveTimer} />
             <div className="mb-4">
-              <input
-                className="form-control"
-                value={formatTime(timer.time)}
-                readOnly
-              />
+              <h1 className="time-view">{formatTime(timer.time)}</h1>
             </div>
             <div>
               <button
