@@ -1,41 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { PlayFill, PauseFill, ArrowCounterclockwise } from 'react-bootstrap-icons';
+import { Container, Row, Col } from "react-bootstrap";
+import { PlayFill, PauseFill } from "react-bootstrap-icons";
+import Menu from "./components/Menu";
 
 function App() {
-  const [time, setTime] = useState(1500); // Tempo inicial em segundos (25 minutos)
+  const [timer, setTimer] = useState({ type: "focus", time: 1500 });
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     let interval;
 
-    if (isActive && time > 0) {
+    if (isActive && timer.time > 0) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime - 1);
+        setTimer((prevTimer) => ({ ...prevTimer, time: prevTimer.time - 1 }));
       }, 1000);
-    } else if (isActive && time === 0) {
-      // Quando o tempo atinge 0, reinicie o timer
+    } else if (isActive && timer.time === 0) {
       clearInterval(interval);
       setIsActive(false);
-      setTime(1500);
+      setTimer({
+        type: timer.type,
+        time:
+          timer.type === "focus"
+            ? 1500
+            : timer.type === "shortBreak"
+            ? 300
+            : 900,
+      });
     }
 
     return () => clearInterval(interval);
-  }, [isActive, time]);
+  }, [isActive, timer]);
 
   const toggleTimer = () => {
     setIsActive((prevIsActive) => !prevIsActive);
   };
 
-  const resetTimer = () => {
-    setIsActive(false);
-    setTime(1500);
-  };
-
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
+
+  const setActiveTimer = (newTimer) => {
+    setIsActive(false);
+    setTimer(newTimer);
   };
 
   return (
@@ -43,11 +51,16 @@ function App() {
       <Row className="justify-content-center align-items-center vh-100">
         <Col xs={12} md={6} lg={4} className="text-center">
           <h1 className="mb-4">Pomodoro Timer</h1>
+          <Menu setActiveTimer={setActiveTimer} />
           <div className="mb-4">
-            <input className="form-control" value={formatTime(time)} readOnly />
+            <input
+              className="form-control"
+              value={formatTime(timer.time)}
+              readOnly
+            />
           </div>
           <div>
-            <Button variant={isActive ? "warning" : "primary"} onClick={toggleTimer}>
+            <button className="different-button" onClick={toggleTimer}>
               {isActive ? (
                 <span>
                   <PauseFill className="me-2" />
@@ -59,11 +72,7 @@ function App() {
                   Start
                 </span>
               )}
-            </Button>
-            <Button variant="danger" onClick={resetTimer}>
-              <ArrowCounterclockwise className="me-2" />
-              Reset
-            </Button>
+            </button>
           </div>
         </Col>
       </Row>
