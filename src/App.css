@@ -1,5 +1,113 @@
+:root {
+  --second-red: #c15c5c;
+  --red: #ba4949;
+  --second-green: #4c9196;
+  --green: #38858a;
+  --second-blue: #4d7fa2;
+  --blue: #397097;
+  --white: #f2f2f2;
+}
+
 .different-button {
   background-color: #f2f2f2;
-  color: red;
   border: none;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-transform: uppercase;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.focus-background {
+  background-color: var(--red); /* Vermelho para o Focus */
+}
+
+.short-break-background {
+  background-color: var(--green); /* Verde para o Short Break */
+}
+
+.long-break-background {
+  background-color: var(--blue); /* Azul para o Long Break */
+}
+
+.focus-second-background {
+  background-color: var(--second-red); /* Vermelho para o Focus */
+}
+
+.short-second-break-background {
+  background-color: var(--second-green); /* Verde para o Short Break */
+}
+
+.long-second-break-background {
+  background-color: var(--second-blue); /* Azul para o Long Break */
+}
+
+.focus-color {
+  color: var(--red); /* Vermelho para o Focus */
+}
+
+.short-break-color {
+  color: var(--green); /* Verde para o Short Break */
+}
+
+.long-break-color {
+  color: var(--blue); /* Azul para o Long Break */
+}
+
+.options {
+  color: var(--white);
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+}
+
+.actived-focus {
+  background-color: var(--red);
+  font-weight: 600;
+  border: none;
+  color: var(--white);
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.actived-short-break {
+  background-color: var(--green);
+  font-weight: 600;
+  border: none;
+  color: var(--white);
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.actived-long-break {
+  background-color: var(--blue);
+  font-weight: 600;
+  border: none;
+  color: var(--white);
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+.app {
+  transition: all 900ms;
+}
+
+.focus-second-background,
+.short-second-break-background,
+.long-second-break-background {
+  transition: all 900ms;
+  padding: 3vh;
+  border-radius: 7px;
+}
+
+.logo {
+  font-weight: 600;
+}
+
+.circle {
+  margin: 15px 6px;
 }
